@@ -2,8 +2,8 @@
   "name": "@lunie/cosmos-api",
   "version": "0.2.1",
   "description": "Cosmos API is a library for interacting with applications built on the Cosmos SDK.",
-  "main": "src/index.js",
-  "files": ["src"],
+  "main": "lib/cosmos.js",
+  "files": ["lib"],
   "scripts": {
     "test": "jest",
     "lint": "eslint src/* --fix",
