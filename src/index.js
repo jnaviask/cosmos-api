@@ -104,5 +104,5 @@ export default class Cosmos {
   }
 }
 
-export { createSignedTransaction } from './send'
+export { createSignedTransaction, createStdTx } from './send'
 export { createSignMessage } from './signature'

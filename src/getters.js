@@ -13,7 +13,7 @@ export default function Getters (cosmosRESTURL) {
         const isTxsPagination = path.startsWith('/txs?')
         if (isTxsPagination) url = url + `&page=${page}&limit=${limit}`
 
-        const response = await fetch(url).then(res => res.json())
+        let response = await fetch(url).then(res => res.json())
 
         // handle txs pagination
         if (isTxsPagination) {
@@ -25,10 +25,10 @@ export default function Getters (cosmosRESTURL) {
         // handle height wrappers
         // most responses are wrapped in a construct containing height and the actual result
         if (response.height !== undefined && response.result !== undefined) {
-          return response.result
+          response = response.result;
         }
 
-        return response.result
+        return response
       } catch (err) {
         if (--tries === 0) {
           throw err
@@ -56,9 +56,8 @@ export default function Getters (cosmosRESTURL) {
       }
       return get(`/auth/accounts/${address}`)
         .then(res => {
-          if (!res) return emptyAccount
-          let account = res.value || emptyAccount
           // HACK, hope for: https://github.com/cosmos/cosmos-sdk/issues/3885
+          let account = res.value || emptyAccount
           if (res.type === `auth/DelayedVestingAccount`) {
             if (!account.BaseVestingAccount) {
               console.error(
