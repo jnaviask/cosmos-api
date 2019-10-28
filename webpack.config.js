@@ -8,6 +8,7 @@ const config = {
     libraryTarget: 'umd',
     umdNamedDefine: true,
   },
+  mode: 'development',
   module: {
     rules: [
       {
