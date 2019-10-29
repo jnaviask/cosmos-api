@@ -94,7 +94,10 @@ export function createStdTx ({ gas, gasPrices, memo }, messages) {
 // returnType can be block (inclusion in block), async (right away), sync (after checkTx has passed)
 function createBroadcastBody (signedTx, returnType = `sync`) {
   return JSON.stringify({
-    tx: signedTx,
+    tx: {
+      type: 'cosmos-sdk/StdTx',
+      value: signedTx,
+    },
     mode: returnType
   })
 }
